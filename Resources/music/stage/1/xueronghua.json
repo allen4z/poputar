@@ -1,0 +1,339 @@
+{
+    "type": "TONIC",
+    "key": "C",
+    "title": "雪绒花",
+    "bpm": 90,
+    "beatFlag": "4:3",
+    "plays": [
+              {
+              "p_index": 1,
+              "range": "1:24"
+              },
+              {
+              "p_index": 2,
+              "range": "9:16"
+              }
+              ],
+    "sections": [
+                 {
+                 "s_index": 1,
+                 "tonics": [
+                            {
+                            "t_index": 1,
+                            "note": "3",
+                            "length": 2
+                            },
+                            {
+                            "t_index": 2,
+                            "note": "5",
+                            "length": 1
+                            }
+                            ]
+                 },
+                 {
+                 "s_index": 2,
+                 "tonics": [
+                            {
+                            "t_index": 1,
+                            "note": "2+",
+                            "length": 3
+                            }
+                            ]
+                 },
+                 {
+                 "s_index": 3,
+                 "tonics": [
+                            {
+                            "t_index": 1,
+                            "note": "1+",
+                            "length": 2
+                            },
+                            {
+                            "t_index": 2,
+                            "note": "5",
+                            "length": 1
+                            }
+                            ]
+                 },
+                 {
+                 "s_index": 4,
+                 "tonics": [
+                            {
+                            "t_index": 1,
+                            "note": "4",
+                            "length": 3
+                            }
+                            ]
+                 },
+                 {
+                 "s_index": 5,
+                 "tonics": [
+                            {
+                            "t_index": 1,
+                            "note": "3",
+                            "length": 2
+                            },
+                            {
+                            "t_index": 2,
+                            "note": "3",
+                            "length": 1
+                            }
+                            ]
+                 },
+                 {
+                 "s_index": 6,
+                 "tonics": [
+                            {
+                            "t_index": 1,
+                            "note": "3",
+                            "length": 1
+                            },
+                            {
+                            "t_index": 2,
+                            "note": "4",
+                            "length": 1
+                            },
+                            {
+                            "t_index": 3,
+                            "note": "5",
+                            "length": 1
+                            }
+                            ]
+                 },
+                 {
+                 "s_index": 7,
+                 "tonics": [
+                            {
+                            "t_index": 1,
+                            "note": "6",
+                            "length": 3
+                            }
+                            ]
+                 },
+                 {
+                 "s_index": 8,
+                 "tonics": [
+                            {
+                            "t_index": 1,
+                            "note": "5",
+                            "length": 3
+                            }
+                            ]
+                 },
+                 {
+                 "s_index": 9,
+                 "tonics": [
+                            {
+                            "t_index": 1,
+                            "note": "3",
+                            "length": 2
+                            },
+                            {
+                            "t_index": 2,
+                            "note": "5",
+                            "length": 1
+                            }
+                            ]
+                 },
+                 {
+                 "s_index": 10,
+                 "tonics": [
+                            {
+                            "t_index": 1,
+                            "note": "2+",
+                            "length": 3
+                            }
+                            ]
+                 },
+                 {
+                 "s_index": 11,
+                 "tonics": [
+                            {
+                            "t_index": 1,
+                            "note": "1+",
+                            "length": 2
+                            },
+                            {
+                            "t_index": 2,
+                            "note": "5",
+                            "length": 1
+                            }
+                            ]
+                 },
+                 {
+                 "s_index": 12,
+                 "tonics": [
+                            {
+                            "t_index": 1,
+                            "note": "4",
+                            "length": 3
+                            }
+                            ]
+                 },
+                 {
+                 "s_index": 13,
+                 "tonics": [
+                            {
+                            "t_index": 1,
+                            "note": "3",
+                            "length": 2
+                            },
+                            {
+                            "t_index": 2,
+                            "note": "5",
+                            "length": 1
+                            }
+                            ]
+                 },
+                 {
+                 "s_index": 14,
+                 "tonics": [
+                            {
+                            "t_index": 1,
+                            "note": "5",
+                            "length": 1
+                            },
+                            {
+                            "t_index": 2,
+                            "note": "6",
+                            "length": 1
+                            },
+                            {
+                            "t_index": 3,
+                            "note": "7",
+                            "length": 1
+                            }
+                            ]
+                 },
+                 {
+                 "s_index": 15,
+                 "tonics": [
+                            {
+                            "t_index": 1,
+                            "note": "1+",
+                            "length": 3
+                            }
+                            ]
+                 },
+                 {
+                 "s_index": 16,
+                 "tonics": [
+                            {
+                            "t_index": 1,
+                            "note": "1+",
+                            "length": 3
+                            }
+                            ]
+                 },
+                 {
+                 "s_index": 17,
+                 "tonics": [
+                            {
+                            "t_index": 1,
+                            "note": "2+",
+                            "length": 2
+                            },
+                            {
+                            "t_index": 2,
+                            "note": "5",
+                            "length": 1
+                            }
+                            ]
+                 },
+                 {
+                 "s_index": 18,
+                 "tonics": [
+                            {
+                            "t_index": 1,
+                            "note": "7",
+                            "length": 1
+                            },
+                            {
+                            "t_index": 2,
+                            "note": "6",
+                            "length": 1
+                            },
+                            {
+                            "t_index": 3,
+                            "note": "5",
+                            "length": 1
+                            }
+                            ]
+                 },
+                 {
+                 "s_index": 19,
+                 "tonics": [
+                            {
+                            "t_index": 1,
+                            "note": "3",
+                            "length": 2
+                            },
+                            {
+                            "t_index": 2,
+                            "note": "5",
+                            "length": 1
+                            }
+                            ]
+                 },
+                 {
+                 "s_index": 20,
+                 "tonics": [
+                            {
+                            "t_index": 1,
+                            "note": "1+",
+                            "length": 3
+                            }
+                            ]
+                 },
+                 {
+                 "s_index": 21,
+                 "tonics": [
+                            {
+                            "t_index": 1,
+                            "note": "6",
+                            "length": 2
+                            },
+                            {
+                            "t_index": 2,
+                            "note": "1+",
+                            "length": 1
+                            }
+                            ]
+                 },
+                 {
+                 "s_index": 22,
+                 "tonics": [
+                            {
+                            "t_index": 1,
+                            "note": "2+",
+                            "length": 2
+                            },
+                            {
+                            "t_index": 2,
+                            "note": "1+",
+                            "length": 1
+                            }
+                            ]
+                 },
+                 {
+                 "s_index": 23,
+                 "tonics": [
+                            {
+                            "t_index": 1,
+                            "note": "7",
+                            "length": 3
+                            }
+                            ]
+                 },
+                 {
+                 "s_index": 24,
+                 "tonics": [
+                            {
+                            "t_index": 1,
+                            "note": "5",
+                            "length": 3
+                            }
+                            ]
+                 }
+                 ]
+}

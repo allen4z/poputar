@@ -93,8 +93,8 @@ bool AppDelegate::applicationDidFinishLaunching() {
     PluginHelper::init();
     //蓝牙连接场景
     
-//    auto scene = BLEScene::createScene();
-    auto scene = GameLevel::createScene();
+    auto scene = BLEScene::createScene();
+//    auto scene = GameLevel::createScene();
     director->runWithScene(scene);
 
     return true;

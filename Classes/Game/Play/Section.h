@@ -12,6 +12,7 @@
 #include <stdio.h>
 #include "PlayConfig.h"
 #include "PlayChord.h"
+#include "MusicAnalysis.h"
 
 
 USING_NS_CC;
@@ -48,15 +49,21 @@ public:
     int type;
     
     //弹奏的和弦map 其中key为最小节拍的循环次数（从0开始）  例如： 一拍循环4次，其中第1次和第3次需要弹奏，则key为0，2
+    //和弦信息
     Map<int,PlayChord*> playChords;
-    
+    //主音信息
     map<int, TonicInfo*> playTonics;
+    //主音蓝牙信息
+    map<int,unsigned char*> leftBlueToothDatas;
+    
+    map<int,unsigned char*> rightBlueToothDatas;
     
     PlayConfig* playConfig;
     
     string lastSection;
     //小节的总宽度
     float sectionWidth;
+    
     
     string getChordFlag(string chordType);
     
@@ -80,11 +87,11 @@ public:
     
     void sendBlueTooth4Chord(PlayChord *chord);
     
-    void sendBlueTooth4ChordLift(PlayChord *chord);
+    void sendBlueTooth4ChordRight(PlayChord *chord);
     
     void sendBlueTooth4Tonic(string strInfo);
     
-    void sendBlueTooth4tonicLift(string strInfo);
+    void sendBlueTooth4tonicRight(string strInfo);
     
     //和弦声音控制
     void chordVoiceCallback(Ref* ref);

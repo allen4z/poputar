@@ -30,13 +30,9 @@ bool BLEScene::init(){
         return false;
     }
     auto rootNode = CSLoader::createNode("ble/BLEScene.csb");
-    
     addChild(rootNode);
-    
     label = (ui::Text*)rootNode->getChildByName("Text_1");
-     
     schedule(schedule_selector(BLEScene::connectBle), 3.0f,kRepeatForever,0.1f);
-
     return true;
 }
 //连接蓝牙
@@ -61,9 +57,16 @@ void BLEScene::connectBle(float dt){
 
 //跳转到下一界面
 void BLEScene::nextSence(float dt){
+
+    //保持蓝牙长连接
+    BLEConnectSingle::startConnect();
+    
     auto nextScene = GameLevel::createScene();
     auto transition = TransitionCrossFade::create(0.5f, nextScene);
     Director::getInstance()->replaceScene(transition);
+    //test
+//    MusicAnalysis::sendMusicChar("2:1@|@4:2@|@5:3");
+//    MusicAnalysis::sendRightChar(0, 0);
 }
 
 

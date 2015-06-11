@@ -17,7 +17,7 @@
                          {
                          "node": 3,
                          "type":"S",
-                         "music": "test_1"
+                         "music": "xueronghua"
                          }
                          ]
                },
@@ -28,7 +28,7 @@
                          {
                          "node": 1,
                          "type":"C",
-                         "music": "test_2"
+                         "music": "c_study"
                          },
                          {
                          "node": 2,
@@ -38,23 +38,23 @@
                          {
                          "node": 3,
                          "type":"C",
-                         "music": "chord_f"
+                         "music": "test_2"
                          }
                          ,
                          {
                          "node": 4,
                          "type":"C",
-                         "music": "chord_g"
+                         "music": "test_2"
                          },
                          {
                          "node": 5,
                          "type":"S",
-                         "music": "chord_change4two"
+                         "music": "test_2"
                          },
                          {
                          "node": 6,
                          "type":"S",
-                         "music": "cunzai"
+                         "music": "test_2"
                          }
                          ]
                }

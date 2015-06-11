@@ -1,0 +1,102 @@
+{
+    "type": "CHORD",
+    "key": "C",
+    "title": "和弦入门（二指C和弦、Am和弦）",
+    "bpm": 30,
+    "beatFlag": "4:4",
+    "plays": [
+              {
+              "p_index": 1,
+              "range": "1:4"
+              }
+              ],
+    "sections": [
+                 {
+                 "s_index": 1,
+                 "beats": [
+                           {
+                           "b_index": 1,
+                           "chord": "C",
+                           "length": 2,
+                           "play": "6@|@5@|@4@|@3@|@2@|@1"
+                           },
+                           {
+                           "b_index": 2,
+                           "chord": "C",
+                           "length": 2,
+                           "play": "6@|@5@|@4@|@3@|@2@|@1"
+                           }
+                           ]
+                 },{
+                 "s_index": 2,
+                 "beats": [
+                           {
+                           "b_index": 1,
+                           "chord": "C",
+                           "length": 1,
+                           "play": "6@|@5@|@4@|@3@|@2@|@1"
+                           },
+                           {
+                           "b_index": 2,
+                           "chord": "C",
+                           "length": 1,
+                           "play": "6@|@5@|@4@|@3@|@2@|@1"
+                           },{
+                           "b_index": 3,
+                           "chord": "C",
+                           "length": 1,
+                           "play": "6@|@5@|@4@|@3@|@2@|@1"
+                           },
+                           {
+                           "b_index": 4,
+                           "chord": "C",
+                           "length": 1,
+                           "play": "6@|@5@|@4@|@3@|@2@|@1"
+                           }
+                           ]
+                 },{
+                 "s_index": 3,
+                 "beats": [
+                           {
+                           "b_index": 1,
+                           "chord": "Am",
+                           "length": 2,
+                           "play": "6@|@5@|@4@|@3@|@2@|@1"
+                           },
+                           {
+                           "b_index": 2,
+                           "chord": "Am",
+                           "length": 2,
+                           "play": "6@|@5@|@4@|@3@|@2@|@1"
+                           }
+                           ]
+                 },{
+                 "s_index": 4,
+                 "beats": [
+                           {
+                           "b_index": 1,
+                           "chord": "Am",
+                           "length": 1,
+                           "play": "6@|@5@|@4@|@3@|@2@|@1"
+                           },
+                           {
+                           "b_index": 2,
+                           "chord": "Am",
+                           "length": 1,
+                           "play": "6@|@5@|@4@|@3@|@2@|@1"
+                           },{
+                           "b_index": 3,
+                           "chord": "Am",
+                           "length": 1,
+                           "play": "6@|@5@|@4@|@3@|@2@|@1"
+                           },
+                           {
+                           "b_index": 4,
+                           "chord": "Am",
+                           "length": 1,
+                           "play": "6@|@5@|@4@|@3@|@2@|@1"
+                           }
+                           ]
+                 }
+                 ]
+}

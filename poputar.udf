@@ -27,5 +27,18 @@
         <LastRunType Value="Unknown" />
       </Value>
     </Item>
+    <Item Key="TabsParamsKey">
+      <Value ctype="TabsInfo">
+        <OpenedDocuments>
+          <FilePathData Path="game/pass/PassLayer.csd" />
+          <FilePathData Path="game/pass/PassScene.csd" />
+          <FilePathData Path="game/pass/Pick.csd" />
+          <FilePathData Path="game/end/EndLayer.csd" />
+          <FilePathData Path="musicLib/MusicLibScene.csd" />
+          <FilePathData Path="gameLevel/GameLevelCardLayer.csd" />
+        </OpenedDocuments>
+        <ActiveDocument Path="musicLib/MusicLibScene.csd" />
+      </Value>
+    </Item>
   </Properties>
 </UserData>

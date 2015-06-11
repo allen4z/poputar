@@ -14,17 +14,27 @@
 USING_NS_CC;
 using namespace std;
 
-class MusicAnalysis:public Singleton<MusicAnalysis>{
-
+class MusicAnalysis:public Singleton<MusicAnalysis>,public Node{
+private:
+    char getGradeChar(int grade);
+    char getRightChar(int strInfo);
 public:
     
     MusicAnalysis(void);
     ~MusicAnalysis(void);
-    //和弦解析为音符字符串
-    void sendChordStr(string chord);
+    
+    
+    //和弦解析为音符字符串  和弦 特殊把位
+    unsigned char* sendChordStr(string chord,string special);
     
     //将字符串解析为二维数组并组装成为02命令的指令
-    void sendMusicChar(string musical);
+    unsigned char* sendMusicChar(string musical,string nextMusical);
+    
+    unsigned char* sendRightChar(int command,int time);
+    
+    int getLeftStrIndex(int strInfo,int greadInfo,bool weakFlag);
+    
+    void closeLight();
     
 };
 #define musicAnalysis MusicAnalysis::instance()

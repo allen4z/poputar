@@ -82,9 +82,8 @@ void GuitarRun::loadTopFrame(){
     
     //设置歌曲名
     auto label = Label::createWithTTF(title, "fonts/STHeiti-Light.ttc", 36);
-    label->setPosition(150,visibleSize.height-height/2);
+    label->setPosition(label->getContentSize().width/2+100,visibleSize.height-height/2);
     this->addChild(label,LAYER_NUM_MAIN);
-    
 
     auto auditionBtn = ui::Button::create();
     auditionBtn->setTitleFontSize(32);
@@ -170,7 +169,22 @@ void GuitarRun::moveTime(float at){
     }
 }
 
+void GuitarRun::gameStart(){
+    //暂定检测蓝牙状态及发送垃圾指令
+    BLEConnectSingle::pauseConnect();
+    
+    poptGlobal->runLayer->endAnimationSetting();
+    schedule(schedule_selector(GuitarRun::moveTime), 1, kRepeatForever, 0.000001);
+}
+
 void GuitarRun::gameEnd(){
+    
+    //保持蓝牙连接
+    
+    BLEConnectSingle::resumeConnect();
+    
+    musicAnalysis->closeLight();
+    
     //通知和弦关闭
     __Bool* chordVoice = __Bool::create(false);
     __NotificationCenter::getInstance()->postNotification(POPT_CHORD_VOICE,chordVoice);
@@ -253,16 +267,15 @@ void GuitarRun::startAnimation(){
 
     action->setFrameEventCallFunc([=](Frame* frame){
         EventFrame* evnt = dynamic_cast<EventFrame*>(frame);
-         if(!evnt)
-             return;
-         string str = evnt->getEvent();
+        if(!evnt)
+            return;
+        string str = evnt->getEvent();
         
-         if(str == "End"){
-             this->removeChild(layerColor);
-             poptGlobal->runLayer->endAnimationSetting();
-             schedule(schedule_selector(GuitarRun::moveTime), 1, kRepeatForever, 0.000001);
+        if(str == "End"){
+            this->removeChild(layerColor);
+            this->gameStart();
         }
-     });
+    });
 
     this->addChild(layerColor,LAYER_NUM_MASK);
 
@@ -484,7 +497,6 @@ void GuitarRun::clearModel(){
     MusicModel* mm =  poptGlobal->gni->getMusicModel();
     mm->unLoadMusicModel();
     delete mm;
-    
 }
 
 

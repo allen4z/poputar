@@ -1,6 +1,6 @@
 {
     "type": "TONIC",
-    "key": "C",
+    "key": "E",
     "title": "小星星",
     "bpm": 83,
     "beatFlag": "4:4",
@@ -20,22 +20,22 @@
                  "tonics": [
                             {
                             "t_index": 1,
-                            "note": "1",
+                            "note": "1+",
                             "length": 1
                             },
                             {
                             "t_index": 2,
-                            "note": "1",
+                            "note": "1+",
                             "length": 1
                             },
                             {
                             "t_index": 3,
-                            "note": "5",
+                            "note": "5+",
                             "length": 1
                             },
                             {
                             "t_index": 4,
-                            "note": "5",
+                            "note": "5+",
                             "length": 1
                             }
                             ],
@@ -75,23 +75,18 @@
                  "tonics": [
                             {
                             "t_index": 1,
-                            "note": "6",
+                            "note": "6+",
                             "length": 1
                             },
                             {
                             "t_index": 2,
-                            "note": "6",
+                            "note": "6+",
                             "length": 1
                             },
                             {
                             "t_index": 3,
-                            "note": "5",
-                            "length": 1
-                            },
-                            {
-                            "t_index": 4,
-                            "note": "0",
-                            "length": 1
+                            "note": "5+",
+                            "length": 2
                             }
                             ],
                  "beats": [
@@ -160,22 +155,22 @@
                  "tonics": [
                             {
                             "t_index": 1,
-                            "note": "4",
+                            "note": "4+",
                             "length": 1
                             },
                             {
                             "t_index": 2,
-                            "note": "4",
+                            "note": "4+",
                             "length": 1
                             },
                             {
                             "t_index": 3,
-                            "note": "3",
+                            "note": "3+",
                             "length": 1
                             },
                             {
                             "t_index": 4,
-                            "note": "3",
+                            "note": "3+",
                             "length": 1
                             }
                             ]
@@ -215,23 +210,18 @@
                  "tonics": [
                             {
                             "t_index": 1,
-                            "note": "2",
+                            "note": "2+",
                             "length": 1
                             },
                             {
                             "t_index": 2,
-                            "note": "2",
+                            "note": "2+",
                             "length": 1
                             },
                             {
                             "t_index": 3,
-                            "note": "1",
-                            "length": 1
-                            },
-                            {
-                            "t_index": 4,
-                            "note": "0",
-                            "length": 1
+                            "note": "1+",
+                            "length": 2
                             }
                             ]
                  },
@@ -270,22 +260,22 @@
                  "tonics": [
                             {
                             "t_index": 1,
-                            "note": "5",
+                            "note": "5+",
                             "length": 1
                             },
                             {
                             "t_index": 2,
-                            "note": "5",
+                            "note": "5+",
                             "length": 1
                             },
                             {
                             "t_index": 3,
-                            "note": "4",
+                            "note": "4+",
                             "length": 1
                             },
                             {
                             "t_index": 4,
-                            "note": "4",
+                            "note": "4+",
                             "length": 1
                             }
                             ]
@@ -325,23 +315,18 @@
                  "tonics": [
                             {
                             "t_index": 1,
-                            "note": "3",
+                            "note": "3+",
                             "length": 1
                             },
                             {
                             "t_index": 2,
-                            "note": "3",
+                            "note": "3+",
                             "length": 1
                             },
                             {
                             "t_index": 3,
-                            "note": "2",
-                            "length": 1
-                            },
-                            {
-                            "t_index": 4,
-                            "note": "0",
-                            "length": 1
+                            "note": "2+",
+                            "length": 2
                             }
                             ]
                  },
@@ -380,22 +365,22 @@
                  "tonics": [
                             {
                             "t_index": 1,
-                            "note": "5",
+                            "note": "5+",
                             "length": 1
                             },
                             {
                             "t_index": 2,
-                            "note": "5",
+                            "note": "5+",
                             "length": 1
                             },
                             {
                             "t_index": 3,
-                            "note": "4",
+                            "note": "4+",
                             "length": 1
                             },
                             {
                             "t_index": 4,
-                            "note": "4",
+                            "note": "4+",
                             "length": 1
                             }
                             ]
@@ -435,23 +420,18 @@
                  "tonics": [
                             {
                             "t_index": 1,
-                            "note": "3",
+                            "note": "3+",
                             "length": 1
                             },
                             {
                             "t_index": 2,
-                            "note": "3",
+                            "note": "3+",
                             "length": 1
                             },
                             {
                             "t_index": 3,
-                            "note": "2",
-                            "length": 1
-                            },
-                            {
-                            "t_index": 4,
-                            "note": "0",
-                            "length": 1
+                            "note": "2+",
+                            "length": 2
                             }
                             ]
                  }

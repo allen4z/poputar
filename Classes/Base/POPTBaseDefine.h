@@ -64,6 +64,8 @@
 //音乐信息转换为十六进制蓝牙信息
 #include "../BlueTooth/MusicAnalysis.h"
 
+#include "../BlueTooth/BLEConnectSingle.h"
+
 #include "GameSettingLayer.h"
 
 #include "MusicLibScene.h"

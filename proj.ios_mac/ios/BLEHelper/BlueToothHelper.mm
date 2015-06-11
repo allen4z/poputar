@@ -12,7 +12,9 @@ static BlueToothHelper *sharedAccountManagerInstance =nil;
 
 
 //外设UUID
-static NSString *peripheralUUID=@"527E2AB8-E7D1-9105-1E15-9C24C2E767AA";
+static NSString *peripheralUUID=@"0E7BE049-2B59-AAC3-6523-EA47C78A2C04";
+//static NSString *peripheralUUID=@"FB0E9335-8079-4E33-2F15-79C2DCA1A112";
+
 //  static NSString *peripheralUUID=@"B5410B69-7675-3A73-D2A7-3B83364C2744";
 //写入服务UUID
 static NSString *writedServiceUUID=@"FFE5";
@@ -83,43 +85,8 @@ BOOL isConnected = false;
             return;
         }
         
-        
-//        Byte byteData2[] = {0xFF,0x11, 0x60,0x02,0x01,0x00,0x01,0x00,0x02,0x00 ,0x04 ,0x00 ,0x04 ,0x00 ,0x01 ,0x00 ,0x01};
-        
-//        Byte byteData2[] = {0xFF,0x11, 0x6f,0x02,0x00,0x7f,0x00,0x00,0x00,0x00 ,0x00 ,0x00 ,0x00 ,0x00 ,0x00 ,0x00 ,0x00};
-    
-
-         //Byte byteData2[] = {0xFF,0x11, 0x62,0x02,0x01,0x00,0x00,0x00,0x01,0x00 ,0x00 ,0x00 ,0x02 ,0x00 ,0x04 ,0x00 ,0x04};
-
-         //NSData * data2 = [NSData dataWithBytes:byteData2 length:17];
-         //[per4Guitar writeValue:data2 forCharacteristic:writedCharacteristic type:CBCharacteristicWriteWithResponse];
-        
-        //[NSThread sleepForTimeInterval:1];
-        
-//
-//        
-//        [NSThread sleepForTimeInterval:2];
-//        Byte byteData7[] = {0xff,0xd ,0x57 ,0x07 ,
-//            0x01 ,
-//            0x01 ,0x01 ,0x00 ,0x10,
-//            0x02 ,
-//            0x01 ,0x01 ,0xFF ,0xFF};
-//        NSData * data7 = [NSData dataWithBytes:byteData7 length:14];
-//        [per4Guitar writeValue:data7 forCharacteristic:writedCharacteristic type:CBCharacteristicWriteWithResponse];
-//
-//        [NSThread sleepForTimeInterval:2];
-//
-        
-        
-        
-        
-       // NSData * chordData = [NSData dataWithBytes:dataInfo length:17];
-       // [per4Guitar writeValue:chordData forCharacteristic:writedCharacteristic type:CBCharacteristicWriteWithResponse];
-
-        
-        Byte playDataArray[] = {0xFF, 0x07, 0x6f, 0x03,0x08,0x00,0x00};
-        NSData * playData = [NSData dataWithBytes:playDataArray length:7];
-        [per4Guitar writeValue:playData forCharacteristic:writedCharacteristic type:CBCharacteristicWriteWithResponse];
+       NSData * chordData = [NSData dataWithBytes:dataInfo length:26];
+        [per4Guitar writeValue:chordData forCharacteristic:writedCharacteristic type:CBCharacteristicWriteWithResponse];
     }
 }
 

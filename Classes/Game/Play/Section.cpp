@@ -51,6 +51,7 @@ Section* Section::createSection(SectionInfo* sectionInfo,int index,int type,int 
 
 
 void Section::loadRhythm(){
+    
     float unitWidth = playConfig->unitWidth;
     //音乐信息
     MusicModel* musicModel = playConfig->musicModel;
@@ -73,8 +74,6 @@ void Section::loadRhythm(){
         
     }
 }
-
-
 
 void Section::loadMusical(SectionInfo* sectionInfo){
     
@@ -193,19 +192,19 @@ void Section::loadMusical(SectionInfo* sectionInfo){
                     PlayChord* chord = PlayChord::createPlayChord(beat, lineFileName,circleFileName, bX);
                     if(type==SECTION_FORMAL_CHORD){
                         this->addChild(chord);
+                        //初始化左手和弦信息
+                        unsigned char* chordDatas = musicAnalysis->sendChordStr(chord->beatInfo->chordType, chord->beatInfo->stringInfo);
+                        leftBlueToothDatas[b] = chordDatas;
+                        
+                        unsigned char* leftChars= musicAnalysis->sendRightChar(13, 5);
+                        rightBlueToothDatas[b] = leftChars;
+                        
                     }
                     playChords.insert(b, chord);
                 }
                 
                 //增加特殊弹奏标识
                 if(!beat->stringInfo.empty() && beat->stringInfo!=""){
-//                    if(chordFlag.empty() && chordFlag == ""){
-//                        if(sectionIndex%2 == 0){
-//                            chordFlag="C";
-//                        }else{
-//                            chordFlag="Am";
-//                        }
-//                    }
                     string circleFileName = "game/play/"+chordFlag+"_circle.png";
                     vector<string> strings = POPTStringUtils::split(beat->stringInfo, "@|@");
                     for (int i=0; i<strings.size(); i++) {
@@ -250,6 +249,15 @@ void Section::loadMusical(SectionInfo* sectionInfo){
                         auto playStr = PlayString::createPlayString(strInfo,cop,"game/finger/"+fileTemp+"_circle.png",tX);
                         
                         this->addChild(playStr);
+                        
+                        //当前是主音弹奏，则将主音信息放入蓝牙map
+                        unsigned char* tonicDatas = musicAnalysis->sendMusicChar(tonicStrInfo,"");
+                        leftBlueToothDatas[t] = tonicDatas;
+                        
+                        vector<string> musicalVec =  POPTStringUtils::split(tonicStrInfo, ":");
+                        int strInfo4Int = POPTStringUtils::stringToInt(musicalVec[0]);
+                        unsigned char* leftChars= musicAnalysis->sendRightChar(strInfo4Int, playConfig->rhythmTime*1000/10);
+                        rightBlueToothDatas[t] = leftChars;
                     }
                 }
             }
@@ -349,7 +357,10 @@ bool Section::updateState(float relativePosX,int nType){
 
                 if(nType == UPDATE_TYPE_CHORD){
                     //通知右手区
-                    sendBlueTooth4ChordLift(pc);
+                    if(rightBlueToothDatas.find(key) != rightBlueToothDatas.end()){
+                        unsigned char* rightDatas = rightBlueToothDatas[key];
+                        PluginHelper::sendDate(rightDatas);
+                    }
                     result = true;
                 }
             }
@@ -360,7 +371,7 @@ bool Section::updateState(float relativePosX,int nType){
         if(key!=tonicPlayKeyFlag){
             
             if(playTonics.find(key)!=playTonics.end()){
-                TonicInfo *tonic = playTonics.at(key);
+                TonicInfo *tonic = playTonics[key];
                 
                 string note4Str = tonic->note;
                 if(!note4Str.empty() && note4Str != "" && note4Str !="0" ){
@@ -375,7 +386,10 @@ bool Section::updateState(float relativePosX,int nType){
                     if(nType == UPDATE_TYPE_TONIC){
                         //通知右手区
                         string tonicStrInfo = tonic2StrSingleton->getStrInfo(tonic->note);
-                        sendBlueTooth4tonicLift(tonicStrInfo);
+                        if(rightBlueToothDatas.find(key) != rightBlueToothDatas.end()){
+                            unsigned char* rightDatas = rightBlueToothDatas[key];
+                            PluginHelper::sendDate(rightDatas);
+                        }
                         result = true;
                     }
                 }
@@ -386,19 +400,17 @@ bool Section::updateState(float relativePosX,int nType){
         string musicModelType =  playConfig->musicModel->getType();
         if(key != chordSendBTKeyFlag){ //切换蓝牙发送和弦
             if(musicModelType == MUSICMODEL_TYPE_CHORD){
-                
-                if(playChords.find(key) != playChords.end()){
-                    PlayChord* pc = playChords.at(key);
-                    string type = pc->beatInfo->chordType;
-                    sendBlueTooth4Chord(pc);
+                if(leftBlueToothDatas.find(key)!=leftBlueToothDatas.end()){
+                    unsigned char* tc = leftBlueToothDatas[key];
+                    PluginHelper::sendDate(tc);
+                    
                 }
-                
             }else if(musicModelType == MUSICMODEL_TYPE_TONIC){
-                if(playTonics.find(key) != playTonics.end()){
-                    TonicInfo *toinc = playTonics.at(key);
-                    string tonicStrInfo = tonic2StrSingleton->getStrInfo(toinc->note);
-                    sendBlueTooth4Tonic(tonicStrInfo);
-                }
+                if(leftBlueToothDatas.find(key)!=leftBlueToothDatas.end()){
+                    unsigned char* tc = leftBlueToothDatas[key];
+                    PluginHelper::sendDate(tc);
+                    
+                }                
             }
             chordSendBTKeyFlag = key;
         }
@@ -429,22 +441,27 @@ void Section::capoChangeCallback(cocos2d::Ref *ref){
 
 void Section::sendBlueTooth4Chord(PlayChord *chord){
     string type = chord->beatInfo->chordType;
-    log("send blueTooth chord data %s",type.c_str());
 }
 
-void Section::sendBlueTooth4ChordLift(PlayChord *chord){
+void Section::sendBlueTooth4ChordRight(PlayChord *chord){
     
 }
 
 void Section::sendBlueTooth4Tonic(string strInfo){
-    
+//    MusicAnalysis::sendMusicChar(strInfo);
 }
 
-void Section::sendBlueTooth4tonicLift(string strInfo){
-    
+void Section::sendBlueTooth4tonicRight(string strInfo){
+//    vector<string> musicalVec =  POPTStringUtils::split(strInfo, ":");
+//    int strInfo4Int = POPTStringUtils::stringToInt(musicalVec[0]);
+////    MusicAnalysis::sendRightChar(strInfo4Int, 20);
 }
 
 Section::~Section(){
+    
+    leftBlueToothDatas.clear();
+    rightBlueToothDatas.clear();
+    
     __NotificationCenter::getInstance()->removeObserver(this, POPT_CHORD_VOICE);
     __NotificationCenter::getInstance()->removeObserver(this, POPT_METRONOME_VOICE);
     __NotificationCenter::getInstance()->removeObserver(this, POPT_TOINC_VOICE);

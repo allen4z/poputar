@@ -106,8 +106,9 @@ bool PlayRunLayer::init4Finger(const cocos2d::Color4B &&color, MusicModel *music
 }
 
 Layer* PlayRunLayer::loadSectionLayer(bool isFormal){
-    
-    tonic2StrSingleton->loadCurrentTonic(poptGlobal->gni->getMusicModel()->getKey());
+
+    string musicKey = poptGlobal->gni->getMusicModel()->getKey();
+    tonic2StrSingleton->loadCurrentTonic(musicKey);
 
     int sectionIndex = 1;
     auto sectionLayer = Layer::create();
@@ -178,7 +179,7 @@ Layer* PlayRunLayer::loadSectionLayer(bool isFormal){
         sectionIndex++;
     }
     
-    tonic2StrSingleton->unLoadTonic();
+
     return sectionLayer;
 }
 
@@ -447,12 +448,12 @@ void PlayRunLayer::lyricCallbak(int p, int s, int t){
     _delegate->lyricCallback(p,s,t);
 }
 
-
 void PlayRunLayer::setDelegate(PlayRunLayerDelegate *delegate){
     _delegate = delegate;
 }
 
 void PlayRunLayer::onExit(){
+    tonic2StrSingleton->unLoadTonic();
     
     if(accPlaying){
         CocosDenshion::SimpleAudioEngine::getInstance()->end();

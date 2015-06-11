@@ -74,6 +74,8 @@ private:
     void startAnimation();
     //时间轴移动
     void moveTime(float at);
+    //游戏开始
+    void gameStart();
     //游戏结束
     void gameEnd();
     //返回公共方法

@@ -29,7 +29,9 @@ void POPTTonic2StrSingleton::loadCurrentTonic(string type){
         const rapidjson::Value &tonicArray = cArray[t];
         const rapidjson::Value &tonic = tonicArray["tonic"];
         const rapidjson::Value &str = tonicArray["str"];
-        tonic2StrMap[tonic.GetString()] = str.GetString();
+        string key = tonic.GetString();
+        string value = str.GetString();
+        tonic2StrMap[key] = value;
     }
 }
 

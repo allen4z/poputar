@@ -62,6 +62,7 @@
 		04CDED7B1AFDB72200A772DB /* GameLevelCardHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04CDED791AFDB72200A772DB /* GameLevelCardHandler.cpp */; };
 		04CDED7E1AFDBA5C00A772DB /* GameLevelCardReader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04CDED7C1AFDBA5C00A772DB /* GameLevelCardReader.cpp */; };
 		04CDED861B00DEA600A772DB /* pad in Resources */ = {isa = PBXBuildFile; fileRef = 04CDED851B00DEA600A772DB /* pad */; };
+		04D8654B1B2932290066B09E /* BLEConnectSingle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04D865491B2932290066B09E /* BLEConnectSingle.cpp */; };
 		04F0EEA41AEE08C300B8BBB7 /* hd in Resources */ = {isa = PBXBuildFile; fileRef = 04F0EEA11AEE08C300B8BBB7 /* hd */; };
 		04F0EEAC1AEE08E900B8BBB7 /* config in Resources */ = {isa = PBXBuildFile; fileRef = 04F0EEA71AEE08E900B8BBB7 /* config */; };
 		04F0EEAE1AEE08E900B8BBB7 /* music in Resources */ = {isa = PBXBuildFile; fileRef = 04F0EEA91AEE08E900B8BBB7 /* music */; };
@@ -219,6 +220,8 @@
 		04CDED7C1AFDBA5C00A772DB /* GameLevelCardReader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameLevelCardReader.cpp; sourceTree = "<group>"; };
 		04CDED7D1AFDBA5C00A772DB /* GameLevelCardReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameLevelCardReader.h; sourceTree = "<group>"; };
 		04CDED851B00DEA600A772DB /* pad */ = {isa = PBXFileReference; lastKnownFileType = folder; path = pad; sourceTree = "<group>"; };
+		04D865491B2932290066B09E /* BLEConnectSingle.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BLEConnectSingle.cpp; sourceTree = "<group>"; };
+		04D8654A1B2932290066B09E /* BLEConnectSingle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLEConnectSingle.h; sourceTree = "<group>"; };
 		04F0EEA11AEE08C300B8BBB7 /* hd */ = {isa = PBXFileReference; lastKnownFileType = folder; path = hd; sourceTree = "<group>"; };
 		04F0EEA71AEE08E900B8BBB7 /* config */ = {isa = PBXFileReference; lastKnownFileType = folder; path = config; sourceTree = "<group>"; };
 		04F0EEA91AEE08E900B8BBB7 /* music */ = {isa = PBXFileReference; lastKnownFileType = folder; path = music; sourceTree = "<group>"; };
@@ -465,6 +468,8 @@
 				04CD4F2F1AC4F7AE00E59AE5 /* BLEScene.h */,
 				04CD4F321AC4FA4B00E59AE5 /* MusicAnalysis.cpp */,
 				04CD4F331AC4FA4B00E59AE5 /* MusicAnalysis.h */,
+				04D865491B2932290066B09E /* BLEConnectSingle.cpp */,
+				04D8654A1B2932290066B09E /* BLEConnectSingle.h */,
 			);
 			path = BlueTooth;
 			sourceTree = "<group>";
@@ -787,6 +792,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04D8654B1B2932290066B09E /* BLEConnectSingle.cpp in Sources */,
 				04778F3B1AC25D6400260CFC /* BlueToothHelper.mm in Sources */,
 				04778F271AC2574900260CFC /* PluginHelper.mm in Sources */,
 				04778F071AC2567000260CFC /* GameLevelScene.cpp in Sources */,
@@ -873,7 +879,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: yan Zhao (GCRSQS7WY4)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COMPRESS_PNG_FILES = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -911,7 +917,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: yan Zhao (GCRSQS7WY4)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COMPRESS_PNG_FILES = NO;
 				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
