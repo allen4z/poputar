@@ -11,8 +11,6 @@
             </PlistImageFolder>
             <Image Name="BlePlist.png" />
           </Folder>
-          <Project Name="BLELayer.csd" Type="Layer" />
-          <Project Name="BLEScene.csd" Type="Scene" />
           <Project Name="ConnectLogo.csd" Type="Node" />
         </Folder>
         <Folder Name="game">

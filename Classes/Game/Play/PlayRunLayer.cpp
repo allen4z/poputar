@@ -36,8 +36,8 @@ bool PlayRunLayer::init(const cocos2d::Color4B &color){
     CocosDenshion::SimpleAudioEngine::getInstance()->preloadBackgroundMusic(accFileName.c_str());
     
     currentSection=-1;
-    blueToothSection = -1;
-    
+    leftBlueToothSection = -1;
+    rightBlueToothSection = -1;
     return result;
 }
 
@@ -232,7 +232,8 @@ void PlayRunLayer::update(float at){
         playType = UPDATE_TYPE_TONIC;
     }
     sectionNotice(playType);
-    sectionNotice(UPDATE_TYPE_BLUETOOTH);
+    sectionNotice(UPDATE_TYPE_LEFT_BLUETOOTH);
+    sectionNotice(UPDATE_TYPE_RIGHT_BLUETOOTH);
 }
 
 
@@ -245,9 +246,12 @@ void PlayRunLayer::sectionNotice(int type){
         distance = sectionLayer->getPositionX()-gameConfig->impactLine;
     }
     
-    if(type==UPDATE_TYPE_BLUETOOTH){ //蓝牙发送提前一个音符的位置
-        distance-=gameConfig->unitWidth;
+    if(type==UPDATE_TYPE_LEFT_BLUETOOTH){ //蓝牙发送提前一个音符的位置
+        distance-=gameConfig->unitWidth/2;
+    }else if(type == UPDATE_TYPE_RIGHT_BLUETOOTH){
+        distance-=gameConfig->unitWidth/4;
     }
+    
     int currFlag=-1;
     float currFlagTemp = (distance*-1)/gameConfig->sectionWidth;
     
@@ -272,18 +276,27 @@ void PlayRunLayer::sectionNotice(int type){
                     //rhythm->runAction(animate); //九宫格不能自动执行动画
                 }
                 
-                if(result && !accPlaying){
+                if(result && !accPlaying && !isAudition){
                     CocosDenshion::SimpleAudioEngine::getInstance()->playBackgroundMusic(accFileName.c_str(),false);
                     accPlaying = true;
 
                 }
             }
-        }else if(type==UPDATE_TYPE_BLUETOOTH){
-            if(currFlag>=0 && currFlag !=blueToothSection){
-                blueToothSection = currFlag;
+        }else if(type==UPDATE_TYPE_LEFT_BLUETOOTH){
+            if(currFlag>=0 && currFlag !=leftBlueToothSection){
+                leftBlueToothSection = currFlag;
             }
             
-            Section* section =  sectionSprite.at(blueToothSection+1);
+            Section* section =  sectionSprite.at(leftBlueToothSection+1);
+            if(section!=NULL){
+                section->updateState(relativePosX,type);
+            }
+        }else if(type ==  UPDATE_TYPE_RIGHT_BLUETOOTH){
+            if(currFlag>=0 && currFlag !=rightBlueToothSection){
+                rightBlueToothSection = currFlag;
+            }
+            
+            Section* section =  sectionSprite.at(rightBlueToothSection+1);
             if(section!=NULL){
                 section->updateState(relativePosX,type);
             }

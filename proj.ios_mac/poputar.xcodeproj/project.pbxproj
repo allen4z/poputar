@@ -50,6 +50,7 @@
 		048FE9751AEE86470008E835 /* fonts in Resources */ = {isa = PBXBuildFile; fileRef = 048FE9731AEE86470008E835 /* fonts */; };
 		048FE97C1AEE86D10008E835 /* MusicModel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 048FE97A1AEE86D10008E835 /* MusicModel.cpp */; };
 		048FE97D1AEE86D10008E835 /* MusicModel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 048FE97A1AEE86D10008E835 /* MusicModel.cpp */; };
+		0498652C1B2C08F0002CA0FF /* GuitarTableView.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0498652A1B2C08F0002CA0FF /* GuitarTableView.cpp */; };
 		0499683F1B0C774B00B3CABA /* POPTTonic2StrSingleton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0499683D1B0C774B00B3CABA /* POPTTonic2StrSingleton.cpp */; };
 		049968451B11620C00B3CABA /* LyricModel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 049968431B11620C00B3CABA /* LyricModel.cpp */; };
 		049968481B11B23D00B3CABA /* PlayInfo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 049968461B11B23D00B3CABA /* PlayInfo.cpp */; };
@@ -199,6 +200,8 @@
 		048FE9731AEE86470008E835 /* fonts */ = {isa = PBXFileReference; lastKnownFileType = folder; path = fonts; sourceTree = "<group>"; };
 		048FE97A1AEE86D10008E835 /* MusicModel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MusicModel.cpp; sourceTree = "<group>"; };
 		048FE97B1AEE86D10008E835 /* MusicModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MusicModel.h; sourceTree = "<group>"; };
+		0498652A1B2C08F0002CA0FF /* GuitarTableView.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GuitarTableView.cpp; sourceTree = "<group>"; };
+		0498652B1B2C08F0002CA0FF /* GuitarTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GuitarTableView.h; sourceTree = "<group>"; };
 		0499683D1B0C774B00B3CABA /* POPTTonic2StrSingleton.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = POPTTonic2StrSingleton.cpp; sourceTree = "<group>"; };
 		0499683E1B0C774B00B3CABA /* POPTTonic2StrSingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = POPTTonic2StrSingleton.h; sourceTree = "<group>"; };
 		049968431B11620C00B3CABA /* LyricModel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LyricModel.cpp; sourceTree = "<group>"; };
@@ -470,6 +473,8 @@
 				04CD4F331AC4FA4B00E59AE5 /* MusicAnalysis.h */,
 				04D865491B2932290066B09E /* BLEConnectSingle.cpp */,
 				04D8654A1B2932290066B09E /* BLEConnectSingle.h */,
+				0498652A1B2C08F0002CA0FF /* GuitarTableView.cpp */,
+				0498652B1B2C08F0002CA0FF /* GuitarTableView.h */,
 			);
 			path = BlueTooth;
 			sourceTree = "<group>";
@@ -820,6 +825,7 @@
 				04400F5C1AEE9B7500596225 /* PlayConfig.cpp in Sources */,
 				04245F811ADBC78C00A1D92A /* POPTVideoPlayer.mm in Sources */,
 				049968451B11620C00B3CABA /* LyricModel.cpp in Sources */,
+				0498652C1B2C08F0002CA0FF /* GuitarTableView.cpp in Sources */,
 				503AE10217EB989F00D1A890 /* RootViewController.mm in Sources */,
 				043E4B641AF0BAB300A89B31 /* PlayChord.cpp in Sources */,
 				04CDED7E1AFDBA5C00A772DB /* GameLevelCardReader.cpp in Sources */,

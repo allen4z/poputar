@@ -3,7 +3,7 @@
 
 #include "./BlueTooth/BLEScene.h"
 #include "./GameLevel/GameLevelScene.h"
-
+#include "./BlueTooth/MusicAnalysis.h"
 
 USING_NS_CC;
 
@@ -87,10 +87,8 @@ bool AppDelegate::applicationDidFinishLaunching() {
     
     glview->setDesignResolutionSize(designSize.width, designSize.height, ResolutionPolicy::NO_BORDER);
     
-    
-    
     //蓝牙初始化
-    PluginHelper::init();
+    PluginHelper::getInstance()->init();
     //蓝牙连接场景
     
     auto scene = BLEScene::createScene();
@@ -103,6 +101,9 @@ bool AppDelegate::applicationDidFinishLaunching() {
 // This function will be called when the app is inactive. When comes a phone call,it's be invoked too
 void AppDelegate::applicationDidEnterBackground() {
     Director::getInstance()->stopAnimation();
+    
+    musicAnalysis->closeLight();
+
 
     // if you use SimpleAudioEngine, it must be pause
     // SimpleAudioEngine::getInstance()->pauseBackgroundMusic();
@@ -111,7 +112,7 @@ void AppDelegate::applicationDidEnterBackground() {
 // this function will be called when the app is active again
 void AppDelegate::applicationWillEnterForeground() {
     Director::getInstance()->startAnimation();
-
+    
     // if you use SimpleAudioEngine, it must resume here
     // SimpleAudioEngine::getInstance()->resumeBackgroundMusic();
 }

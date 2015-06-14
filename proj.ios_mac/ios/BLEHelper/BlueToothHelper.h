@@ -11,7 +11,6 @@
 #include <CoreBluetooth/CoreBluetooth.h>
 #import <CoreBluetooth/CBService.h>
 
-
 @interface BlueToothHelper : NSObject<CBCentralManagerDelegate,CBPeripheralDelegate>
 
 @property (strong,nonatomic) CBCentralManager *cbCentralMgr;
@@ -22,12 +21,16 @@
 
 -(void)didLoad;
 
--(void)addLog:(NSString*)log;
+-(void) disconnect;
 
 -(void) scanPeripherals;
+
+-(void) connectPeripherals:(NSString*) uuid;
 
 -(void) sendData:(Byte[]) dataInfo;
 
 -(bool) isConnected;
+
+-(void) addLog:(NSString*)log;
 
 @end

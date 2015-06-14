@@ -17,7 +17,8 @@ USING_NS_CC;
 //播放类型
 #define UPDATE_TYPE_CHORD 0 //正式播放
 #define UPDATE_TYPE_TONIC 1
-#define UPDATE_TYPE_BLUETOOTH 2 //蓝牙传输
+#define UPDATE_TYPE_LEFT_BLUETOOTH 2 //蓝牙传输
+#define UPDATE_TYPE_RIGHT_BLUETOOTH 3
 
 //试听控制
 #define AUDITION_PAUSE 0

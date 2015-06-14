@@ -58,9 +58,12 @@ private:
     //伴奏是否播放
     bool accPlaying;
     
+    //当前撞线小节标识
     int currentSection;
-    int blueToothSection;
-    
+    //当前左手蓝牙切换小节标识
+    int leftBlueToothSection;
+    //当前右手蓝牙切换小节标识
+    int rightBlueToothSection;
 public:
     ~PlayRunLayer();
     

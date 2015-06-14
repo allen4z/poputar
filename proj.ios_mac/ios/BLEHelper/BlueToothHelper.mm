@@ -6,14 +6,16 @@
 //
 //
 
+#include "PluginHelper.h"
 #import "BlueToothHelper.h"
+
 
 static BlueToothHelper *sharedAccountManagerInstance =nil;
 
 
 //外设UUID
-static NSString *peripheralUUID=@"0E7BE049-2B59-AAC3-6523-EA47C78A2C04";
-//static NSString *peripheralUUID=@"FB0E9335-8079-4E33-2F15-79C2DCA1A112";
+//static NSString *peripheralUUID=@"0E7BE049-2B59-AAC3-6523-EA47C78A2C04";
+//static NSString *peripheralUUID=@"A4D4731D-9AD5-2337-AC95-0835871759D6";
 
 //  static NSString *peripheralUUID=@"B5410B69-7675-3A73-D2A7-3B83364C2744";
 //写入服务UUID
@@ -59,6 +61,12 @@ BOOL isConnected = false;
     
 }
 
+-(void)disconnect{
+    [self.cbCentralMgr stopScan];
+    [self.cbCentralMgr cancelPeripheralConnection:per4Guitar];
+    isConnected = false;
+}
+
 
 -(bool)isConnected{
     return isConnected;
@@ -73,6 +81,17 @@ BOOL isConnected = false;
     [self.cbCentralMgr scanForPeripheralsWithServices:nil options:options];
     
     [self getcentralManagerStateStr:self.cbCentralMgr];
+}
+
+-(void) connectPeripherals:(NSString *)uuid{
+    for (int i=0; i<[_peripheralArray count]; i++) {
+        CBPeripheral *peripheral = [_peripheralArray objectAtIndex:i];
+        NSString *peripheralUUID = [peripheral.identifier UUIDString];
+        if([peripheralUUID isEqual:uuid]){
+            per4Guitar = peripheral;
+            [self.cbCentralMgr connectPeripheral:peripheral options:[NSDictionary dictionaryWithObject:[NSNumber numberWithBool:YES] forKey:CBConnectPeripheralOptionNotifyOnDisconnectionKey]];
+        }
+    }
 }
 
 -(void)sendData:(Byte[])dataInfo{
@@ -138,12 +157,21 @@ BOOL isConnected = false;
     NSString *uuid = [peripheral.identifier UUIDString];
     
     [self addLog:uuid];
+    std::string str4UUID = [uuid UTF8String];
+    std::string str4Name = [peripheral.name UTF8String];
     
-    if([uuid isEqual:peripheralUUID]){
-        per4Guitar = peripheral;
-        
-        [self.cbCentralMgr connectPeripheral:per4Guitar options:[NSDictionary dictionaryWithObject:[NSNumber numberWithBool:YES] forKey:CBConnectPeripheralOptionNotifyOnDisconnectionKey]];
-    }
+    
+    PluginHelper::getInstance()->sendGuitarInfo(str4UUID, str4Name);
+    
+//    if(peripheralUUID == nil || [ peripheralUUID isEqualToString:@""]){
+//       
+//    }else{
+//        if([uuid isEqual:peripheralUUID]){
+//            per4Guitar = peripheral;
+//            
+//            [self.cbCentralMgr connectPeripheral:per4Guitar options:[NSDictionary dictionaryWithObject:[NSNumber numberWithBool:YES] forKey:CBConnectPeripheralOptionNotifyOnDisconnectionKey]];
+//        }
+//    }
 }
 
 //连接外设
@@ -191,8 +219,6 @@ BOOL isConnected = false;
     [self addLog:peripheral.name];
     [self addLog:[NSString stringWithFormat:@"%@",service]];
     for (CBCharacteristic * characteristic in service.characteristics) {
-       // [self addLog:[NSString stringWithFormat:@"%@ characteristic:%@",characteristic,characteristic.UUID]];
-//        [peripheral setNotifyValue:YES forCharacteristic:characteristic];
         if(characteristic.properties ==CBCharacteristicPropertyNotify){
             [self addLog:[NSString stringWithFormat:@"%@ notify characteristic:%@",characteristic,characteristic.UUID]];
             [peripheral setNotifyValue:YES forCharacteristic:characteristic];
@@ -257,13 +283,14 @@ BOOL isConnected = false;
 {
     [self addLog:@"-------------didFailToConnectPeripheral-----------------"];
     [self addLog:peripheral.name];
+    isConnected = false;
 }
 
 - (void)centralManager:(CBCentralManager *)central didDisconnectPeripheral:(CBPeripheral *)peripheral error:(NSError *)error
 {
     [self addLog:@"-------------didDisconnectPeripheral-----------------"];
     [self addLog:peripheral.name];
-    
+    isConnected = false;
 }
 
 
@@ -281,6 +308,7 @@ BOOL isConnected = false;
 //
 //
 //}
+//
 //- (void)centralManager:(CBCentralManager *)central didRetrievePeripherals:(NSArray *)peripherals
 //{
 //    [self addLog:@"-------------didRetrievePeripherals-----------------"];
@@ -299,21 +327,21 @@ BOOL isConnected = false;
 //
 //
 //}
-
+//
 //- (void)peripheralDidUpdateName:(CBPeripheral *)peripheral NS_AVAILABLE(NA, 6_0)
 //{
 //    [self addLog:@"-------------peripheralDidUpdateName-----------------"];
 //    [self addLog:peripheral.name];
 //    
 //}
-//
+////
 //- (void)peripheralDidInvalidateServices:(CBPeripheral *)peripheral NS_DEPRECATED(NA, NA, 6_0, 7_0)
 //{
 //    [self addLog:@"-------------peripheralDidInvalidateServices-----------------"];
 //    [self addLog:peripheral.name];
 //    
 //}
-//
+////
 //- (void)peripheral:(CBPeripheral *)peripheral didModifyServices:(NSArray *)invalidatedServices NS_AVAILABLE(NA, 7_0)
 //{
 //    [self addLog:@"-------------didModifyServices-----------------"];
@@ -327,7 +355,7 @@ BOOL isConnected = false;
 //    [self addLog:peripheral.name];
 //    
 //}
-
+//
 //- (void)peripheral:(CBPeripheral *)peripheral didDiscoverIncludedServicesForService:(CBService *)service error:(NSError *)error
 //{
 //    [self addLog:@"-------------didDiscoverIncludedServicesForService-----------------"];
@@ -352,7 +380,7 @@ BOOL isConnected = false;
 //        [self addLog:[NSString stringWithFormat:@"%@ value:%@",characteristic,characteristic.value]];
 //    }
 //}
-
+//
 //- (void)peripheral:(CBPeripheral *)peripheral didUpdateNotificationStateForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error
 //{
 //    
@@ -360,7 +388,7 @@ BOOL isConnected = false;
 //    [self addLog:peripheral.name];
 //    [self addLog:[NSString stringWithFormat:@"%@",characteristic]];
 //}
-
+//
 //- (void)peripheral:(CBPeripheral *)peripheral didDiscoverDescriptorsForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error
 //{
 //    [self addLog:@"-------------didDiscoverDescriptorsForCharacteristic-----------------"];
@@ -368,7 +396,7 @@ BOOL isConnected = false;
 //    [self addLog:[NSString stringWithFormat:@"%@",characteristic]];
 //    
 //}
-
+//
 //- (void)peripheral:(CBPeripheral *)peripheral didUpdateValueForDescriptor:(CBDescriptor *)descriptor error:(NSError *)error
 //{
 //    [self addLog:@"-------------didUpdateValueForDescriptor-----------------"];

@@ -13,6 +13,9 @@
 #include "../Base/Singleton.h"
 #include <cocos2d.h>
 
+#define CURR_BLE_UUID "ble_uuid"
+#define CURR_BLE_NAME "ble_name"
+
 USING_NS_CC;
 class BLEConnectSingle:public Node{
 public:

@@ -23,11 +23,13 @@ PlayString* PlayString::createPlayString(string strInfo,string cop,string circle
 void PlayString::loadFrame(string strInfo,string cop,string circleFileName){
     
     auto *l = Label::createWithTTF(cop, "fonts/STHeiti-Light.ttc", 30);
-    l->setColor(Color3B::BLACK);
+    l->setColor(Color3B::WHITE);
     l->setPosition(this->getContentSize().width/2,this->getContentSize().height/2);
     this->addChild(l);
     
     int str4Int = POPTStringUtils::stringToInt(strInfo);
     float y = strToY(str4Int);
     this->setPosition(Vec2(x,y));
+    
+    this->setScale(2.0f);
 }

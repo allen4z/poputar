@@ -24,6 +24,9 @@ EndLayer* EndLayer::createEndLayer(bool gameResult,bool isPassLevel){
 void EndLayer::loadFrame(bool gameReslut){
 
     auto endLayer = CSLoader::createNode("game/end/EndLayer.csb");
+    endLayer->setContentSize(cocos2d::Director::getInstance()->getOpenGLView()->getDesignResolutionSize());
+    ui::Helper::doLayout(endLayer);
+    
     addChild(endLayer,MASK_WIDGET_LAYER);
     
     for (int i=1; i<4; i++) {

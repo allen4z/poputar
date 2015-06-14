@@ -70,6 +70,8 @@
 
 #include "MusicLibScene.h"
 
+#include "GuitarTableView.h"
+
 //关卡场景
 #include "../GameLevel/GameLevelScene.h"
 #include "../GameLevel/GameLevelMenuItem.h"

@@ -155,7 +155,6 @@ char MusicAnalysis::getGradeChar(int grade){
     }
     grade -= 1;
     result=1<<grade;
-    log("%c",result);
     return result;
 }
 
@@ -228,7 +227,7 @@ void MusicAnalysis::closeLight(){
     for (int i =2; i<27; i++) {
         command[i] = 0x00;
     }
-    PluginHelper::sendDate(command);
+    PluginHelper::getInstance()->sendDate(command);
 }
 
 

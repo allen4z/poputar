@@ -12,6 +12,8 @@
 int chordPlayKeyFlag=-1;
 //和弦发送蓝牙控制标识
 int chordSendBTKeyFlag = -1;
+//发送右手去蓝牙控制标识
+int sendRightBTKeyFlag = -1;
 //主音控制标识
 int tonicPlayKeyFlag=-1;
 //节拍器控制
@@ -357,10 +359,10 @@ bool Section::updateState(float relativePosX,int nType){
 
                 if(nType == UPDATE_TYPE_CHORD){
                     //通知右手区
-                    if(rightBlueToothDatas.find(key) != rightBlueToothDatas.end()){
-                        unsigned char* rightDatas = rightBlueToothDatas[key];
-                        PluginHelper::sendDate(rightDatas);
-                    }
+//                    if(rightBlueToothDatas.find(key) != rightBlueToothDatas.end()){
+//                        unsigned char* rightDatas = rightBlueToothDatas[key];
+//                        PluginHelper::sendDate(rightDatas);
+//                    }
                     result = true;
                 }
             }
@@ -385,34 +387,43 @@ bool Section::updateState(float relativePosX,int nType){
                     
                     if(nType == UPDATE_TYPE_TONIC){
                         //通知右手区
-                        string tonicStrInfo = tonic2StrSingleton->getStrInfo(tonic->note);
-                        if(rightBlueToothDatas.find(key) != rightBlueToothDatas.end()){
-                            unsigned char* rightDatas = rightBlueToothDatas[key];
-                            PluginHelper::sendDate(rightDatas);
-                        }
+                        //string tonicStrInfo = tonic2StrSingleton->getStrInfo(tonic->note);
+                        
+//                        if(rightBlueToothDatas.find(key) != rightBlueToothDatas.end()){
+//                            unsigned char* rightDatas = rightBlueToothDatas[key];
+//                            PluginHelper::sendDate(rightDatas);
+//                        }
                         result = true;
                     }
                 }
             }
             tonicPlayKeyFlag = key;
         }
-    }else if(nType == UPDATE_TYPE_BLUETOOTH){
+    }else if(nType == UPDATE_TYPE_LEFT_BLUETOOTH){
         string musicModelType =  playConfig->musicModel->getType();
         if(key != chordSendBTKeyFlag){ //切换蓝牙发送和弦
             if(musicModelType == MUSICMODEL_TYPE_CHORD){
                 if(leftBlueToothDatas.find(key)!=leftBlueToothDatas.end()){
                     unsigned char* tc = leftBlueToothDatas[key];
-                    PluginHelper::sendDate(tc);
+                    PluginHelper::getInstance()->sendDate(tc);
                     
                 }
             }else if(musicModelType == MUSICMODEL_TYPE_TONIC){
                 if(leftBlueToothDatas.find(key)!=leftBlueToothDatas.end()){
                     unsigned char* tc = leftBlueToothDatas[key];
-                    PluginHelper::sendDate(tc);
+                    PluginHelper::getInstance()->sendDate(tc);
                     
                 }                
             }
             chordSendBTKeyFlag = key;
+        }
+    }else if(nType == UPDATE_TYPE_RIGHT_BLUETOOTH){
+        if(key != sendRightBTKeyFlag){
+            if(rightBlueToothDatas.find(key) != rightBlueToothDatas.end()){
+                unsigned char* rightDatas = rightBlueToothDatas[key];
+                PluginHelper::getInstance()->sendDate(rightDatas);
+            }
+            sendRightBTKeyFlag = key;
         }
     }
     

@@ -38,20 +38,24 @@ void BLEConnectSingle::resumeConnect(){
 
 void BLEConnectSingle::bleConnectUpdate(float at){
     //判断吉他是否连接
-    bool isConnect =PluginHelper::isConnected();
+    bool isConnect =PluginHelper::getInstance()->isConnected();
     
     //吉他未连接则连接吉他
     if (!isConnect) {
-        PluginHelper::scanBLEPeripherals();
+        string uuid = UserDefault::getInstance()->getStringForKey(CURR_BLE_UUID);
+        if(!uuid.empty()){
+            PluginHelper::getInstance()->connect(uuid);
+        }
     }
-    
-    //吉他已经连接则发送保持连接垃圾指令
     if(isConnect){
-        unsigned char command[2];
-        command[0] = 0xf5;
-        command[1] = 0x00;
-        PluginHelper::sendDate(command);
-        log("ble ble ble connecting.......");
+        //吉他已经连接则发送保持连接垃圾指令
+        if(isConnect){
+            unsigned char command[2];
+            command[0] = 0xf5;
+            command[1] = 0x00;
+            PluginHelper::getInstance()->sendDate(command);
+            log("ble ble ble connecting.......");
+        }
     }
 }
 

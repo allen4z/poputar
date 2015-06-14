@@ -111,7 +111,7 @@
             <FileData Type="PlistSubImage" Path="ble/ble_loading_1.png" Plist="ble/BLEScene/BlePlist.plist" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
-          <AbstractNodeData Name="ble_ble_loading_2_2" ActionTag="-967797217" Tag="2289" Alpha="191" IconVisible="False" LeftMargin="-74.0000" RightMargin="-74.0000" TopMargin="-141.5000" BottomMargin="-141.5000" ctype="SpriteObjectData">
+          <AbstractNodeData Name="ble_ble_loading_2_2" ActionTag="-967797217" Tag="2289" IconVisible="False" LeftMargin="-74.0000" RightMargin="-74.0000" TopMargin="-141.5000" BottomMargin="-141.5000" ctype="SpriteObjectData">
             <Size X="148.0000" Y="283.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position />
@@ -121,6 +121,17 @@
             <PreSize />
             <FileData Type="PlistSubImage" Path="ble/ble_loading_2.png" Plist="ble/BLEScene/BlePlist.plist" />
             <BlendFunc Src="1" Dst="771" />
+          </AbstractNodeData>
+          <AbstractNodeData Name="Text_1" ActionTag="-1075347587" Tag="38" IconVisible="False" HorizontalEdge="BothEdge" LeftMargin="-68.0000" RightMargin="-68.0000" TopMargin="163.0000" BottomMargin="-197.0000" FontSize="30" LabelText="正在连接吉他" OutlineSize="1" ShadowOffsetX="2" ShadowOffsetY="-2" ctype="TextObjectData">
+            <Size X="180.0000" Y="34.0000" />
+            <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+            <Position Y="-180.0000" />
+            <Scale ScaleX="1.0000" ScaleY="1.0000" />
+            <CColor A="255" R="255" G="255" B="255" />
+            <PrePosition />
+            <PreSize />
+            <OutlineColor A="255" R="255" G="0" B="0" />
+            <ShadowColor A="255" R="255" G="127" B="80" />
           </AbstractNodeData>
         </Children>
       </ObjectData>
