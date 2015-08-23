@@ -59,7 +59,8 @@ MusicModel* MusicModel::initWithFile(string fileName){
         const rapidjson::Value &section = mSections[s];
         const rapidjson::Value &sIndex = section["s_index"];
         sectionInfo->s_index = sIndex.GetInt();
-        //读取主音信息
+        //读取主音信息 被还原
+        
         const rapidjson::Value &tonics = section["tonics"];
         
         if(!tonics.IsNull()){
