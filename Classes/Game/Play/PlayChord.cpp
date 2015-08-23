@@ -57,42 +57,28 @@ void PlayChord::createBangingOut(string chordType, int startStr,int endStr,int u
 
 
 void PlayChord::loadFrame(string circleFileName){
-    string chordType = beatInfo->chordType;
-    string play = beatInfo->play;
-    string stringInfo = beatInfo->stringInfo;
-    //新建扫弦
-    vector<string> playInfos = POPTStringUtils::split(play, "@|@");
-    if(!play.empty() &&play != ""){
-        int startStr;
-        int endStr;
-        float playInfoFlag=0;
-        int upOrDownFlag = 0; //1 代表向上 2代表向下
-        for (int p =0; p<playInfos.size(); p++) {
-             int playInfo = POPTStringUtils::stringToInt(playInfos[p]);
-            if(playInfoFlag == 0){
-                startStr = playInfo;
-            }else if(upOrDownFlag == 0){
-                upOrDownFlag =  playInfo - playInfoFlag >0 ? 1 : 2;
-            }
-            playInfoFlag = playInfo;
-            endStr = playInfo;
-        }
-        
-        //创建拨弦块
-        createBangingOut(chordType,startStr,endStr,upOrDownFlag);
-        
-        auto circle = Sprite::create(circleFileName);
-        float x = this->getContentSize().width/2;
-        float y;
-        if(upOrDownFlag == 1){
-            y = this->getContentSize().height;
-        }else if(upOrDownFlag == 2){
-            y=0;
-        }
-        circle->setPosition(Vec2(x,y));
-        this->addChild(circle);
-    }
+    
+    //创建拨弦块
 
+    string chordType = beatInfo->chordInfo->chordType;
+    vector<int> strokeStringInfo = beatInfo->stroke->strokeStringInfo;
+    string strokSpecial = beatInfo->stroke->strokSpecial;
+    int startStr = strokeStringInfo[0];
+    int endStr = strokeStringInfo[strokeStringInfo.size()-1];
+    int upOrDownFlag=beatInfo->stroke->direction;
+    createBangingOut(chordType,startStr,endStr,upOrDownFlag);
+
+    auto circle = Sprite::create(circleFileName);
+    float x = this->getContentSize().width/2;
+    float y;
+    if(upOrDownFlag == 1){
+        y = this->getContentSize().height;
+    }else if(upOrDownFlag == 2){
+        y=0;
+    }
+    circle->setPosition(Vec2(x,y));
+    this->addChild(circle);
+    
 }
 
     

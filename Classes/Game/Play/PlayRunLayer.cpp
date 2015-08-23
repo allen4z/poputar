@@ -77,24 +77,17 @@ bool PlayRunLayer::init4Finger(const cocos2d::Color4B &&color, MusicModel *music
     this->addChild(testSectionLayer);
     
     //加载音乐
-    map<int,SectionInfo*> sections = gameConfig->musicModel->getSections();
-    int size =  (int)sections.size();
+    map<int,MeasureInfo*> measures = gameConfig->musicModel->getMeasures();
+    int size =  (int)measures.size();
     for (int i=1; i<size+1; i++) {
-        SectionInfo* sectionInfo = sections[i];
-        map<int,BeatInfo*> beats = sectionInfo->beats;
+        MeasureInfo* measureInfo = measures[i];
+        map<int,BeatInfo*> beats = measureInfo->beats;
         for (int b=0; b<beats.size(); b++) {
             BeatInfo* beatInfo =  beats.at(b+1);
-            string type = beatInfo->chordType;
-            string chordFileName = "audio/chord/"+type+"_clean.caf";
-            CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect(chordFileName.c_str());
-        }
-        map<int,TonicInfo*> tonics = sectionInfo->tonics;
-        for (int t=1; t<tonics.size()+1; t++) {
-            TonicInfo* toincInfo = tonics[t];
-            string note4Str = toincInfo->note;
-            if(!note4Str.empty() && note4Str !="0" ){
-                string scaleFileName ="audio/scale/"+note4Str+".mp3";
-                CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect(scaleFileName.c_str());
+            if(beatInfo->chordInfo!=nullptr) {
+                string type = beatInfo->chordInfo->chordType;
+                string chordFileName = "audio/chord/"+type+"_clean.caf";
+                CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect(chordFileName.c_str());
             }
         }
     }
@@ -142,25 +135,39 @@ Layer* PlayRunLayer::loadSectionLayer(bool isFormal){
     }else{
         type = SECTION_AUDITION;
     }
-    map<int,SectionInfo*> sections = gameConfig->musicModel->getSections();
-    map<int,MusicPlayInfo*> plays = gameConfig->musicModel->getPlayInfo();
-    //循环播放模式
-    for (int p = 1; p<plays.size()+1; p++) {
-        MusicPlayInfo* playInfo =  plays[p];
-        int startSectionIndex = playInfo->startSection;
-        int endSectionIndex = playInfo->endSection;
-        
-        for (int s = startSectionIndex; s<=endSectionIndex; s++) {
-            SectionInfo* sectionInfo = sections[s];
-            Section* section = Section::createSection(sectionInfo,sectionIndex,type,playInfo->p_index,s);
-            section->setDelegate(this);
-            sectionLayer->addChild(section);
-            if(isFormal){
-                sectionSprite.insert(sectionIndex, section);
-            }
-            sectionIndex++;
+    map<int,MeasureInfo*> measures = gameConfig->musicModel->getMeasures();
+    vector<int> loops = gameConfig->musicModel->getLoops();
+    
+    for (int l = 0; l<loops.size(); l++) {
+        int measureIndex = loops[l];
+        MeasureInfo* measure = measures[measureIndex];
+        Section* section = Section::createSection(measure,sectionIndex,type,measureIndex,l);
+        section->setDelegate(this);
+        sectionLayer->addChild(section);
+        if(isFormal){
+            sectionSprite.insert(sectionIndex, section);
         }
+        sectionIndex++;
+        
     }
+//    map<int,MusicPlayInfo*> plays = gameConfig->musicModel->getPlayInfo();
+    //循环播放模式
+//    for (int p = 1; p<plays.size()+1; p++) {
+//        MusicPlayInfo* playInfo =  plays[p];
+//        int startSectionIndex = playInfo->startSection;
+//        int endSectionIndex = playInfo->endSection;
+//        
+//        for (int s = startSectionIndex; s<=endSectionIndex; s++) {
+//            SectionInfo* sectionInfo = sections[s];
+//            Section* section = Section::createSection(sectionInfo,sectionIndex,type,playInfo->p_index,s);
+//            section->setDelegate(this);
+//            sectionLayer->addChild(section);
+//            if(isFormal){
+//                sectionSprite.insert(sectionIndex, section);
+//            }
+//            sectionIndex++;
+//        }
+//    }
     
     //增加后置小节
     int afterType;
@@ -363,19 +370,22 @@ void PlayRunLayer::audition(bool isAudition){
 //移动动作
 ActionInterval* PlayRunLayer::getMoveActionIterval(){
     MusicModel* musicModel =  poptGlobal->gni->getMusicModel();
-    map<int,SectionInfo*> sections = musicModel->getSections();
+    map<int,MeasureInfo*> measureInfo = musicModel->getMeasures();
     
     //小节总宽度
     float sectionWidth = gameConfig->sectionWidth;
     //计算小节个数
-    map<int,MusicPlayInfo*> plays =  musicModel->getPlayInfo();
-    int sectionSize=0;
-    for (int p=1; p<plays.size()+1; p++) {
-        MusicPlayInfo* playInfo = plays[p];
-        int startIndex = playInfo->startSection;
-        int endIndex = playInfo->endSection;
-        sectionSize+=(endIndex-startIndex)+1;
-    }
+//    map<int,MusicPlayInfo*> plays =  musicModel->getPlayInfo();
+//    int sectionSize=0;
+//    for (int p=1; p<plays.size()+1; p++) {
+//        MusicPlayInfo* playInfo = plays[p];
+//        int startIndex = playInfo->startSection;
+//        int endIndex = playInfo->endSection;
+//        sectionSize+=(endIndex-startIndex)+1;
+//    }
+    
+    vector<int> loops = gameConfig->musicModel->getLoops();
+    int sectionSize=loops.size();
     
     //加上前置小节
     sectionSize+= gameConfig->beforSectionSize;
@@ -475,25 +485,19 @@ void PlayRunLayer::onExit(){
     }
     
     //卸载音乐
-    map<int,SectionInfo*> sections = gameConfig->musicModel->getSections();
-    int size =  (int)sections.size();
+    map<int,MeasureInfo*> measureInfos = gameConfig->musicModel->getMeasures();
+    int size =  (int)measureInfos.size();
     for (int i=1; i<size+1; i++) {
-        SectionInfo* sectionInfo = sections[i];
-        map<int,BeatInfo*> beats = sectionInfo->beats;
+        MeasureInfo* measureInfo = measureInfos[i];
+        map<int,BeatInfo*> beats = measureInfo->beats;
         for (int b=0; b<beats.size(); b++) {
             BeatInfo* beatInfo =  beats.at(b+1);
-            string type = beatInfo->chordType;
-            string chordFileName = "audio/chord/"+type+"_clean.caf";
-            CocosDenshion::SimpleAudioEngine::getInstance()->unloadEffect(chordFileName.c_str());
-        }
-        map<int,TonicInfo*> tonics = sectionInfo->tonics;
-        for (int t=1; t<tonics.size()+1; t++) {
-            TonicInfo* toincInfo = tonics[t];
-            string note4Str = toincInfo->note;
-            if(!note4Str.empty() && note4Str !="0" ){
-                string scaleFileName ="audio/scale/"+note4Str+".mp3";
-                CocosDenshion::SimpleAudioEngine::getInstance()->unloadEffect(scaleFileName.c_str());
+            if(beatInfo->chordInfo!=nullptr){
+                string type = beatInfo->chordInfo->chordType;
+                string chordFileName = "audio/chord/"+type+"_clean.caf";
+                CocosDenshion::SimpleAudioEngine::getInstance()->unloadEffect(chordFileName.c_str());
             }
+           
         }
     }
     

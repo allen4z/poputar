@@ -122,35 +122,35 @@ void GuitarRun::loadFootFrame(){
 }
 
 void GuitarRun::loadLyric(){
-    float height=footSideHeight;
-    //歌词
-    float lyricSize = 35;
-    MusicModel* mm = poptGlobal->gni->getMusicModel();
-    map<int,lyricRunModel*> lyricContentMap = mm->getLyricModel()->getContentMap();
-    
-    for (int i=1; i<lyricContentMap.size()+1; i++) {
-        lyricRunModel* lrm = lyricContentMap.at(i);
-        auto lyric = Lyric::createLyric(lyricSize, lrm);
-        lyric ->setAnchorPoint(Vec2(0,0.5));
-        lyricMap[i] = lyric;
-        if(i%2 == 0){
-            lyric->setPosition(Vec2(visibleSize.width/3,height/5));
-        }else{
-            lyric->setPosition(Vec2(150,height/5*3));
-        }
-        lyric->setVisible(false);
-        this->addChild(lyric,LAYER_NUM_MAIN);
-    }
-    lyric1 = lyricMap[1];
-    lyric2 = lyricMap[2];
-    if(lyric1!=NULL){
-        lyric1->setVisible(true);
-
-    }
-    if(lyric2!=NULL){
-       lyric2->setVisible(true);
-    }
-    currLyricflag = 3;
+//    float height=footSideHeight;
+//    //歌词
+//    float lyricSize = 35;
+//    MusicModel* mm = poptGlobal->gni->getMusicModel();
+//    map<int,lyricRunModel*> lyricContentMap = mm->getLyricModel()->getContentMap();
+//    
+//    for (int i=1; i<lyricContentMap.size()+1; i++) {
+//        lyricRunModel* lrm = lyricContentMap.at(i);
+//        auto lyric = Lyric::createLyric(lyricSize, lrm);
+//        lyric ->setAnchorPoint(Vec2(0,0.5));
+//        lyricMap[i] = lyric;
+//        if(i%2 == 0){
+//            lyric->setPosition(Vec2(visibleSize.width/3,height/5));
+//        }else{
+//            lyric->setPosition(Vec2(150,height/5*3));
+//        }
+//        lyric->setVisible(false);
+//        this->addChild(lyric,LAYER_NUM_MAIN);
+//    }
+//    lyric1 = lyricMap[1];
+//    lyric2 = lyricMap[2];
+//    if(lyric1!=NULL){
+//        lyric1->setVisible(true);
+//
+//    }
+//    if(lyric2!=NULL){
+//       lyric2->setVisible(true);
+//    }
+//    currLyricflag = 3;
 }
 
 //移动时间轴定时任务的方法
@@ -445,52 +445,52 @@ void GuitarRun::auditionBackCallback(cocos2d::Ref *ref){
 
 void GuitarRun::lyricCallback(int p, int s, int t){
     
-    MusicModel* mm = poptGlobal->gni->getMusicModel();
-    map<int,lyricRunModel*> lyricContentMap = mm->getLyricModel()->getContentMap();
-    
-    //下一小节的歌词
-    if(lyricContentMap.find(currLyricflag) != lyricContentMap.end()){
-        lyricRunModel* currlrm = lyricContentMap.at(currLyricflag-1);
-        if(p==currlrm->s_pIndex && s== currlrm->s_sIndex && t==currlrm->s_tIndex){
-            if(!lyricFlag){
-                this->removeChild(lyric2);
-                lyric2 = lyricMap[currLyricflag];
-                lyric2->setVisible(true);
-            }else{
-                this->removeChild(lyric1);
-                lyric1 = lyricMap[currLyricflag];
-                lyric1->setVisible(true);
-                //lyric1->changeLyricText(nextlrm);
-                //this->addChild(lyric1,LAYER_NUM_MAIN);
-            }
-        }
-    }
-    
-    //切换歌词
-    if (lyricContentMap.find(currLyricflag-1)!=lyricContentMap.end()) {
-        lyricRunModel* currlrm = lyricContentMap.at(currLyricflag-1);
-        if(p==currlrm->s_pIndex && s== currlrm->s_sIndex && t==currlrm->s_tIndex){
-            lyricFlag = !lyricFlag;
-            currLyricflag+=1;
-        }
-    }
-    
-    string key = POPTStringUtils::intToString(p)
-                +"@|@"+
-                POPTStringUtils::intToString(s)
-                +"@|@"+
-                POPTStringUtils::intToString(t);
-    
-    if(lyricFlag){
-        if(lyric1 != NULL){
-            lyric1->lyricChangeColor(key);
-        }
-        
-    }else{
-        if(lyric2 != NULL){
-            lyric2->lyricChangeColor(key);
-        }
-    }
+//    MusicModel* mm = poptGlobal->gni->getMusicModel();
+//    map<int,lyricRunModel*> lyricContentMap = mm->getLyricModel()->getContentMap();
+//    
+//    //下一小节的歌词
+//    if(lyricContentMap.find(currLyricflag) != lyricContentMap.end()){
+//        lyricRunModel* currlrm = lyricContentMap.at(currLyricflag-1);
+//        if(p==currlrm->s_pIndex && s== currlrm->s_sIndex && t==currlrm->s_tIndex){
+//            if(!lyricFlag){
+//                this->removeChild(lyric2);
+//                lyric2 = lyricMap[currLyricflag];
+//                lyric2->setVisible(true);
+//            }else{
+//                this->removeChild(lyric1);
+//                lyric1 = lyricMap[currLyricflag];
+//                lyric1->setVisible(true);
+//                //lyric1->changeLyricText(nextlrm);
+//                //this->addChild(lyric1,LAYER_NUM_MAIN);
+//            }
+//        }
+//    }
+//    
+//    //切换歌词
+//    if (lyricContentMap.find(currLyricflag-1)!=lyricContentMap.end()) {
+//        lyricRunModel* currlrm = lyricContentMap.at(currLyricflag-1);
+//        if(p==currlrm->s_pIndex && s== currlrm->s_sIndex && t==currlrm->s_tIndex){
+//            lyricFlag = !lyricFlag;
+//            currLyricflag+=1;
+//        }
+//    }
+//    
+//    string key = POPTStringUtils::intToString(p)
+//                +"@|@"+
+//                POPTStringUtils::intToString(s)
+//                +"@|@"+
+//                POPTStringUtils::intToString(t);
+//    
+//    if(lyricFlag){
+//        if(lyric1 != NULL){
+//            lyric1->lyricChangeColor(key);
+//        }
+//        
+//    }else{
+//        if(lyric2 != NULL){
+//            lyric2->lyricChangeColor(key);
+//        }
+//    }
 }
 
 void GuitarRun::clearModel(){

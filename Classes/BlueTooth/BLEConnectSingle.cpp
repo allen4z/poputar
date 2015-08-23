@@ -29,11 +29,17 @@ void BLEConnectSingle::stopConnect(){
 }
 
 void BLEConnectSingle::pauseConnect(){
-    SCHEDULE->pauseTarget(m_bleConnectSingle);
+    bool isConnect =PluginHelper::getInstance()->isConnected();
+    if(isConnect){
+        SCHEDULE->pauseTarget(m_bleConnectSingle);
+    }
 }
 
 void BLEConnectSingle::resumeConnect(){
-    SCHEDULE->resumeTarget(m_bleConnectSingle);
+    bool isConnect =PluginHelper::getInstance()->isConnected();
+    if(isConnect){
+        SCHEDULE->resumeTarget(m_bleConnectSingle);
+    }
 }
 
 void BLEConnectSingle::bleConnectUpdate(float at){

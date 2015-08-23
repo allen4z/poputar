@@ -40,23 +40,16 @@ PlayConfig::PlayConfig(float contentWidth, float contentHeight, MusicModel *musi
     stringsHeight = contentHeight-chordHeight-stringSideHeight*2;
     //弦之间的距离
     stringUnitHeight = stringsHeight/5;
-    map<int,SectionInfo*> sections = musicModel->getSections();
+    map<int,MeasureInfo*> measures = musicModel->getMeasures();
     //小节拍数
     int beatFlag = musicModel->getBeatFlag();
     //小节总宽度
     sectionWidth = unitWidth*beatFlag;
 
-    map<int,MusicPlayInfo*> plays =  musicModel->getPlayInfo();
-    int sectionSize=0;
-    for (int p=1; p<plays.size()+1; p++) {
-        MusicPlayInfo* playInfo = plays[p];
-        int startIndex = playInfo->startSection;
-        int endIndex = playInfo->endSection;
-        sectionSize+=(endIndex-startIndex)+1;
-    }
-//    float sectionSize = (float)musicModel->getSections().size();
+    vector<int> loops = musicModel->getLoops();
+    int sectionSize=loops.size();
+    
     musicTime =contentWidthTime+rhythmTime*(float)sectionSize;
-
     
     //1、根据每秒移动距离计算开始动画的移动距离
     float countdownWidth = move4sec * 4.0f;
